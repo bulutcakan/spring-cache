@@ -3,6 +3,8 @@ package com.bulut.deneme.cache.service.impl;
 import com.bulut.deneme.cache.dto.SampleDTO;
 import com.bulut.deneme.cache.service.DataGeneratorService;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ public class DataGenaratorServiceImpl implements DataGeneratorService {
     }
 
     @Override
+    @CachePut(value = "demoDataCache", key = "#sampleDTO.id")
     public SampleDTO save(SampleDTO sampleDTO) {
         sampleDTO.setId(i);
         data.add(sampleDTO);
@@ -41,11 +44,13 @@ public class DataGenaratorServiceImpl implements DataGeneratorService {
     }
 
     @Override
+    @CacheEvict(value = "demoDataCache", key = "#id")
     public void delete(long id) {
         data.removeIf(sampleDTO -> sampleDTO.getId() == id);
     }
 
     @Override
+    @CacheEvict(value = "demoDataCache", key = "#sampleDTO.id")
     public SampleDTO update(SampleDTO sampleDTO) {
         SampleDTO sp = data.stream().filter(sampleDTO1 -> sampleDTO1.getId() ==
                 sampleDTO.getId()).findFirst().get();

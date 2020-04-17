@@ -3,6 +3,8 @@ package com.bulut.deneme.cache.controller;
 import com.bulut.deneme.cache.dto.SampleDTO;
 import com.bulut.deneme.cache.service.DataGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +24,7 @@ public class CacheTestController {
     DataGeneratorService dataGeneratorService;
 
     @GetMapping("")
+    @Cacheable("demoDataCache")
     public ResponseEntity getDemoData() {
         return new ResponseEntity<>(dataGeneratorService.getSampleData(), HttpStatus.OK);
     }
