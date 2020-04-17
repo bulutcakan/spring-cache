@@ -39,7 +39,7 @@ public class CacheTestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteDemoData(@PathVariable long id;) {
+    public ResponseEntity deleteDemoData(@PathVariable long id) {
         dataGeneratorService.delete(id);
         return new ResponseEntity<>("deleted", HttpStatus.OK);
 
