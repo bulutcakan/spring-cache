@@ -24,7 +24,6 @@ public class CacheTestController {
     DataGeneratorService dataGeneratorService;
 
     @GetMapping("")
-    @Cacheable("demoDataCache")
     public ResponseEntity getDemoData() {
         return new ResponseEntity<>(dataGeneratorService.getSampleData(), HttpStatus.OK);
     }

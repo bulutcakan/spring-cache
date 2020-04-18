@@ -1,0 +1,17 @@
+# docker-compose.yml
+version: '2'
+
+services:
+  redis:
+    image: redis:4
+    command: redis-server --requirepass s3cret
+    ports:
+    - 6379
+
+  app:
+    image: koroglu/mkblog-spring-cache-redis
+    environment:
+      REDIS_HOST: redis
+      REDIS_PASS: s3cret
+    ports:
+    - 8080:8080

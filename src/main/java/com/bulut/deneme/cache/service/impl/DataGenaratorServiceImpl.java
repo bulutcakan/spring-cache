@@ -5,6 +5,7 @@ import com.bulut.deneme.cache.service.DataGeneratorService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class DataGenaratorServiceImpl implements DataGeneratorService {
     int i = 1;
 
     @Override
+    @Cacheable("demoDataCache")
     public List<SampleDTO> getSampleData() {
 
         IntStream.range(0, 100)
